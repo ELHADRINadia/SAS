@@ -7,7 +7,7 @@ typedef struct client
    {
        char nom [30];
        char prenom [20];
-       char  numero [7];
+       int  numero,i ;
        char  CIN [8];
        float montant;
 
@@ -18,28 +18,31 @@ typedef struct client
 
    void trie_Ascendant( ) {
 
-float montant ;
-int i, j, pos ;
-float min;
+//float montant ;
+       int i, j, pos ;
+       client cl;
+   float min;
     for(i=0;i<count_c;i++)
     {
-          min=c[i].montant;
+          
          for (j=i+1;j<count_c;j++)
          {
-          if(c[j].montant<min)
+          if(c[i].montant>c[j].montant)
           {
-           min=c[j].montant;
-           pos=j;
+           cl = c[i];
+           c[i]=c[j];
+           c[i]=cl;
            }
          }
-          c[i]=c[i];
-          c[i] =c[pos];
-          c[pos]=c[i];
+          
     }
+    for(i=0;i<count_c;i++){
+
     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
 }
+	}
 void trie_Descendant( ) {
-    ;
+    
 float montant ;
  float min;
 int i, j, pos;
@@ -95,7 +98,7 @@ int main()
                 printf("6 => Quitter l'application \n\n");
 
                 printf("Votre choix : ");
-			scanf("%d", &choix);
+		    	scanf("%d", &choix);
 
 
 
@@ -107,15 +110,15 @@ int main()
 
                 case 1: // entrer un compte ===========================================================================
                          printf("\n entrer le nom client : \n");
-                         scanf("%s",&c[count_c].nom);
+                         scanf("%s",c[count_c].nom);
                          printf("\n entrer le prenom client : \n");
-                         scanf("%s",&c[count_c].prenom);
+                         scanf("%s",c[count_c].prenom);
                          printf("entrer le numero client : \n");
-                         scanf("%s",&c[count_c].numero);
+                         scanf("%d",c[count_c].numero);
                          printf("entrer le montant \n");
                          scanf("%f",&c[count_c].montant);
                          printf("entrer le CIN client :\n ");
-                         scanf("%s",&c[count_c].CIN);
+                         scanf("%s",c[count_c].CIN);
                             count_c++;
 
                             system("cls");
@@ -135,16 +138,16 @@ int main()
 
                             printf("----|| client [%d] ||----\n\n",i+1);
                             printf("entrer le nom de client [%d]= : ",i+1);
-                            scanf("%s",&c[i].nom);
+                            scanf("%s",c[i].nom);
                             printf("entrer le prenom de client [%d]= : ",i+1);
-                            scanf("%s",&c[i].prenom);
+                            scanf("%s",c[i].prenom);
 							printf("entrer le numero de client : ");
-                            scanf("%s",&c[i].numero);
+                            scanf("%d",&c[i].numero);
                             printf("entrer le montant de client : ");
                             scanf("%f",&c[i].montant);
 
                             printf("entrer le CIN de client : ");
-                            scanf("%s",&c[i].CIN);
+                            scanf("%s",c[i].CIN);
 
 
                             printf("\n\n ");
@@ -172,7 +175,7 @@ int main()
                             {
                                 case 1: // retrait ==========================================================================
 
-                                     printf("Entrer cin qui veut cette opération: ");
+                                     printf("Entrer cin qui veut cette opÃ©ration: ");
                                        scanf("%s", recherche);
 
                                        for(i=0; i<count_c; i++)
@@ -216,7 +219,7 @@ int main()
 
                             case 2: //  DEPOT  =====================================================================================
 
-                                        printf("Entrer cin qui veut cette opération: ");
+                                        printf("Entrer cin qui veut cette opÃ©ration: ");
                                        scanf("%s", recherche);
 
                                        for(i=0; i<count_c; i++)
@@ -262,8 +265,8 @@ int main()
 				printf("1 => recherche par cin \n");
                 printf("2 => Par Ordre Ascendant\n");
                 printf("3 => Par Ordre Descendant \n");
-                printf("4 => Par Ordre Ascendant (les comptes bancaire ayant un montant supérieur à un chiffre introduit )\n ");
-                printf("5 => Par Ordre Descendant (les comptes bancaire ayant un montant supérieur à chiffre introduit) \n");
+                printf("4 => Par Ordre Ascendant (les comptes bancaire ayant un montant supÃ©rieur Ã  un chiffre introduit )\n ");
+                printf("5 => Par Ordre Descendant (les comptes bancaire ayant un montant supÃ©rieur Ã  chiffre introduit) \n");
                 printf("6 => afficher la liste des donnees \n");
 
                 printf("Votre choix : ");
@@ -293,13 +296,14 @@ int main()
                 case 3:
                 	trie_Descendant();
                 	break;
-                case 4:
                 	float m;
+                case 4:
+                	
                 	printf("entrez le montant");
-                	scanf("%d"&m);
+                	scanf("%f",&m);
                 	if(m<c[i].montant){
 
-                	trie_Ascendant();
+//                	trie_Ascendant();
                 	printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le montant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
                 		}
                 	else
@@ -307,7 +311,7 @@ int main()
                 	break;
                 case 5:
                 printf("entrez le montant");
-                	scanf("%d"&m);
+                	scanf("%f",&m);
                 	if(m<c[i].montant){
 
                 		trie_Descendant();
@@ -331,7 +335,7 @@ int main()
 			}
 			case 5: printf("fidelisation \n");
 		      	fidelisation();
-		      	printf("les montant apres fidelisatin est %f",c[i].montant+);
+		      	printf("les montant apres fidelisatin est %f",c[i].montant);
 			break;
 			case 6: printf(" ");
             break;
