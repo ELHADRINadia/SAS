@@ -16,33 +16,52 @@ typedef struct client
     client c[20];
 
 
-   void trie_Ascendant( ) {
+   // void Affichage() {
+   //     int i;
+   //  for(i=1;i<=count_c;i++)
+    //{
+    // printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+    //}
 
-//float montant ;
-       int i, j, pos ;
-       client cl;
-   float min;
-    for(i=0;i<count_c;i++)
+  // }
+
+
+
+
+
+ void trie_Ascendant()
+{
+    int i,j;
+    char tempCIN[10], tempNom[20], tempPrenom[20];
+    float tempMontant;
+    for(i=1;i<count_c;i++)
     {
-          
-         for (j=i+1;j<count_c;j++)
-         {
-          if(c[i].montant>c[j].montant)
-          {
-           cl = c[i];
-           c[i]=c[j];
-           c[i]=cl;
-           }
-         }
-          
-    }
-    for(i=0;i<count_c;i++){
+        for(j=i+1;j<=count_c;j++)
+        {
+            if(c[j].montant<c[i].montant)
+            {
+                strcpy(tempCIN,c[i].CIN);
+                strcpy(c[i].CIN,c[j].CIN);
+                strcpy(c[j].CIN,tempCIN);
 
-    printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+                strcpy(tempNom,c[i].nom);
+                strcpy(c[i].nom,c[j].nom);
+                strcpy(c[j].nom,tempNom);
+
+                strcpy(tempPrenom,c[i].prenom);
+                strcpy(c[i].prenom,c[j].prenom);
+                strcpy(c[j].prenom,tempPrenom);
+
+                tempMontant=c[i].montant;
+                c[i].montant=c[j].montant;
+                c[j].montant=tempMontant;
+            }
+        }
+    }
 }
-	}
-void trie_Descendant( ) {
-    
+
+    void trie_Descendant( ) {
+
 float montant ;
  float min;
 int i, j, pos;
@@ -63,7 +82,7 @@ int i, j, pos;
     }
     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
 }
-void fidelisation()
+    void fidelisation()
 {
     int i;
 	trie_Descendant( );
@@ -82,7 +101,7 @@ int main()
                     struct client c[100];
                     int choix,choix1,choix2,i , nbr=0,count_c=0,retrait =0,depot=0,found;
                     char recherche [50];
-                    c[i].montant =0;
+                    float m;
         do
         {
             do
@@ -107,28 +126,29 @@ int main()
 
           switch(choix)
           {
+                case 1:
+                     {// entrer un compte ===========================================================================
 
-                case 1: // entrer un compte ===========================================================================
-                         printf("\n entrer le nom client : \n");
+                        printf("----|| client [%d] ||----\n",count_c+1);
+
+                        printf(" entrer le nom client : ");
                          scanf("%s",c[count_c].nom);
-                         printf("\n entrer le prenom client : \n");
+                         printf(" entrer le prenom client : ");
                          scanf("%s",c[count_c].prenom);
-                         printf("entrer le numero client : \n");
-                         scanf("%d",c[count_c].numero);
+                         printf(" entrer le numero client : ");
+                         scanf("%d",&c[count_c].numero);
                          printf("entrer le montant \n");
                          scanf("%f",&c[count_c].montant);
-                         printf("entrer le CIN client :\n ");
+                         printf("entrer le CIN client :  ");
                          scanf("%s",c[count_c].CIN);
                             count_c++;
 
                             system("cls");
 
+                    break;}
 
-
-
-                    break;
-
-                case 2: // enter plusieur compte ======================================================================
+                case 2:
+                     {// enter plusieur compte ======================================================================
                          printf("entrer le nombre des compte :\n");
                          scanf("%d",&nbr);
 
@@ -156,9 +176,10 @@ int main()
                         }
                                 count_c = count_c+nbr;
 
-                    break;
+                    break;}
 
-                case 3: // enter les operation ==============================================================================
+                case 3:
+                    {// enter les operation ==============================================================================
                      printf("Operations \n");
 
                     int choix1;
@@ -173,7 +194,8 @@ int main()
                         }while(choix1 <1 || choix1>2);
                           switch(choix1)
                             {
-                                case 1: // retrait ==========================================================================
+                                case 1:
+                                    {// retrait ==========================================================================
 
                                      printf("Entrer cin qui veut cette opération: ");
                                        scanf("%s", recherche);
@@ -215,9 +237,10 @@ int main()
                                         if(found==0) printf("Not found");
 
 
-                               break;
+                               break;}
 
-                            case 2: //  DEPOT  =====================================================================================
+                                case 2:
+                                    {//  DEPOT  =====================================================================================
 
                                         printf("Entrer cin qui veut cette opération: ");
                                        scanf("%s", recherche);
@@ -250,17 +273,16 @@ int main()
 
                                         if(found==0) printf("Not found");
 
-                                                break;
+                                                break;}
 
                                                 default:
                                                  break;
                                                 }
 
-                                           break;
+                            break;}
 
-
-
-                     case 4: // AFFICHAGE ==================================================================================
+                case 4:
+                         {// AFFICHAGE ==================================================================================
 
 				printf("1 => recherche par cin \n");
                 printf("2 => Par Ordre Ascendant\n");
@@ -275,7 +297,8 @@ int main()
             while(choix2 <1 || choix2>5);
             switch(choix2)
 			{
-            	case 1: printf("Enter a CIN  to search: ");
+            	case 1:
+            	    {printf("Enter a CIN  to search: ");
                        scanf("%s", recherche);
 
                        for(i=0; i<count_c; i++)
@@ -289,16 +312,23 @@ int main()
                        }
 
                         if(found==0) printf("Not found");
-                        break;
+                        break;}
                 case 2:
+                	{
                 	trie_Ascendant();
-                	break;
+                     for(i=1;i<=count_c;i++)
+                    printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+               	break;}
                 case 3:
-                	trie_Descendant();
-                	break;
-                	float m;
+                	{
+                	    trie_Descendant();
+ for(i=1;i<=count_c;i++)
+    {
+     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+    }
+                	break;}
                 case 4:
-                	
+                    {
                 	printf("entrez le montant");
                 	scanf("%f",&m);
                 	if(m<c[i].montant){
@@ -308,8 +338,9 @@ int main()
                 		}
                 	else
                 	printf("Error");
-                	break;
+                	break;}
                 case 5:
+                    {
                 printf("entrez le montant");
                 	scanf("%f",&m);
                 	if(m<c[i].montant){
@@ -327,21 +358,26 @@ int main()
                             printf("[%d] le nom [%s] \t le prenom [%s] \t le numero [%s] \t  CIN [%s] \t le montant [%d] \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
                          }
 
-                	break;
+                	break;}
 
-                                default:
-                                    break;
+                 default:
+               break;
 
 			}
-			case 5: printf("fidelisation \n");
+                  break;  }
+
+                case 5:
+                    {
+			     printf("fidelisation \n");
 		      	fidelisation();
 		      	printf("les montant apres fidelisatin est %f",c[i].montant);
-			break;
-			case 6: printf(" ");
-            break;
-                default:
-                    break;
-        }
+                break;}
+                case 6:
+                    {
+			    printf("");
+            break;}
+          default:
+            break;}
 
                         }while(choix !=6);
                     return 0;
