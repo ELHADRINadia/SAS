@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1637675248 source:c:\users\1337\desktop\projet sas 2021nadia elhadri\sas 2 2021\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
