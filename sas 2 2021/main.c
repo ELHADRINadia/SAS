@@ -11,10 +11,11 @@ typedef struct client
        char  CIN [8];
        float montant;
 
-   }client;
+   }
+   client;
    int count_c=0;
     client c[20];
-
+    int i,j; 
 
    // void Affichage() {
    //     int i;
@@ -31,7 +32,7 @@ typedef struct client
 
  void trie_Ascendant()
 {
-    int i,j;
+    
     char tempCIN[10], tempNom[20], tempPrenom[20];
     float tempMontant;
     for(i=1;i<count_c;i++)
@@ -60,38 +61,46 @@ typedef struct client
     }
 }
 
-    void trie_Descendant( ) {
-
-float montant ;
- float min;
-int i, j, pos;
-    for(i=0;i<count_c;i++)
-    {
-          min=c[i].montant;
-         for (j=i+1;j<count_c;j++)
-         {
-          if(c[j].montant>min)
-          {
-           min=c[j].montant;
-           pos=j;
-           }
-         }
-          c[i]=c[i];
-          c[i] =c[pos] ;
-          c[pos]=c[i];
-    }
-    printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-}
-    void fidelisation()
+   void trie_Descendant()
 {
-    int i;
-	trie_Descendant( );
-	for(i=0;i<3;i++)
-	{
-		c[i].montant+=c[i].montant*0.013;
-		 printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-	}
+    char tempCIN[10], tempNom[20], tempPrenom[20];
+    float tempMontant;
+    for(i=1;i<count_c;i++)
+    {
+        for(j=i+1;j<=count_c;j++)
+        {
+            if(c[j].montant>c[i].montant)
+            {
+                //permutation
+                strcpy(tempCIN,c[i].CIN);
+                strcpy(c[i].CIN,c[j].CIN);
+                strcpy(c[j].CIN,tempCIN);
+
+                strcpy(tempNom,c[i].nom);
+                strcpy(c[i].nom,c[j].nom);
+                strcpy(c[j].nom,tempNom);
+
+                strcpy(tempPrenom,c[i].prenom);
+                strcpy(c[i].prenom,c[j].prenom);
+                strcpy(c[j].prenom,tempPrenom);
+
+                tempMontant=c[i].montant;
+                c[i].montant=c[j].montant;
+                c[j].montant=tempMontant;
+            }
+        }
+    }
 }
+//    void fidelisation()
+//{
+//    int i;
+//	trie_Descendant( );
+//	for(i=0;i<3;i++)
+//	{
+//		c[i].montant+=c[i].montant*0.013;
+//		 printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+//	}
+//}
 
 
 
@@ -322,7 +331,7 @@ int main()
                 case 3:
                 	{
                 	    trie_Descendant();
- for(i=1;i<=count_c;i++)
+              for(i=1;i<=count_c;i++)
     {
      printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
     }
@@ -333,11 +342,12 @@ int main()
                 	scanf("%f",&m);
                 	if(m<c[i].montant){
 
-//                	trie_Ascendant();
-                	printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le montant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+              	trie_Ascendant();
+                	 for(i=1;i<=count_c;i++)
+    {
+     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+    }
                 		}
-                	else
-                	printf("Error");
                 	break;}
                 case 5:
                     {
@@ -346,18 +356,10 @@ int main()
                 	if(m<c[i].montant){
 
                 		trie_Descendant();
-                		printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le montant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-                		}
-                	else
-                	printf("Error");
-
-
-                         for(i=0 ; i<count_c ; i++)
-                         {
-
-                            printf("[%d] le nom [%s] \t le prenom [%s] \t le numero [%s] \t  CIN [%s] \t le montant [%d] \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-                         }
-
+                	 for(i=1;i<=count_c;i++)
+    {
+     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+    }
                 	break;}
 
                  default:
@@ -369,8 +371,25 @@ int main()
                 case 5:
                     {
 			     printf("fidelisation \n");
-		      	fidelisation();
-		      	printf("les montant apres fidelisatin est %f",c[i].montant);
+		      if(count_c<3){
+      for( i=1;i<=count_c;i++){
+      printf("\n- we gonna add 1.3 to %s  : %.2lf",c[i].CIN,c[i].montant);
+      printf("\n");
+      c[i].montant += c[i].montant*0.013;
+      printf("\nnow he have  %.2lf ",c[i].montant);
+       printf("\n");
+      }
+     }
+     else{
+     trie_Descendant();
+     for( i =1;i<=3;i++){
+     printf("\n- we gonna add 1.3 to %s  : %.2lf",c[i].CIN,c[i].montant);
+      printf("\n");
+      c[i].montant += c[i].montant*0.013;
+      printf("\n now he have %.2lf ",c[i].montant);
+      printf("\n");
+     }
+     }
                 break;}
                 case 6:
                     {
@@ -378,8 +397,11 @@ int main()
             break;}
           default:
             break;}
+             }
 
                         }while(choix !=6);
                     return 0;
                     system("pause");
-    }
+   
+     }
+    
