@@ -394,7 +394,7 @@ int main()
                 break;}
                 case 6:
                     {
-			    printf("");
+			         exit=0;
             break;}
           default:
             break;}
@@ -405,4 +405,5 @@ int main()
                     system("pause");
    
      }
+    
     
