@@ -35,9 +35,9 @@ typedef struct client
     
     char tempCIN[10], tempNom[20], tempPrenom[20];
     float tempMontant;
-    for(i=1;i<count_c;i++)
+    for(i=0;i<count_c-1;i++)
     {
-        for(j=i+1;j<=count_c;j++)
+        for(j=i+1;j<=count_c-1-i;j++)
         {
             if(c[j].montant<c[i].montant)
             {
@@ -66,7 +66,8 @@ typedef struct client
     char tempCIN[10], tempNom[20], tempPrenom[20];
     float tempMontant;
     for(i=1;i<count_c;i++)
-    {
+	
+
         for(j=i+1;j<=count_c;j++)
         {
             if(c[j].montant>c[i].montant)
@@ -90,19 +91,6 @@ typedef struct client
             }
         }
     }
-}
-//    void fidelisation()
-//{
-//    int i;
-//	trie_Descendant( );
-//	for(i=0;i<3;i++)
-//	{
-//		c[i].montant+=c[i].montant*0.013;
-//		 printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-//	}
-//}
-
-
 
 int main()
 {
@@ -209,39 +197,40 @@ int main()
                                      printf("Entrer cin qui veut cette opération: ");
                                        scanf("%s", recherche);
 
-                                       for(i=0; i<count_c; i++)
+                                       for(i=0; i<count_c-1; i++)
                                        {
 
                                          if(strcmp(recherche,c[i].CIN )== 0)
                                          {
                                            found=1;
-                                           printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f DH \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-
-
-                                         }
-
-
-
+  printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f DH \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+	
+									do
+                                        {
                                         printf("entrer la somme de retrait en DH : \n");
                                         scanf("%d", &retrait);
-                                        do
-                                        {
+                                        
                                             if(retrait<100 ) // CONDITION POUR LE MONTANT SUPERIEUR A 100
-                                                {
+                                                
                                                 printf("entrer la somme de retrait en DH superieur a  100 : \n");
-                                                scanf("%d", &retrait);
-                                                }
+                                              
 
                                         }while (retrait<100);
                                         if (retrait>c[i].montant) // POUR NE PAS RETRAIT A COMPTE IF MONTANT EGALE 0
 
                                             printf(" Votre Montant ne pa Suffisant pour retirer \n");
 
-                                        else
+                                        else{
+										
 
                                             c[i].montant= c[i].montant-retrait;
-                                            printf("le montant apres le retrait est %f",c[i].montant);
+                                            printf("le montant apres le retrait est %f\n",c[i].montant);
                                         }
+												}
+
+                                         }
+				 
+
 
                                         if(found==0) printf("Not found");
 
@@ -254,7 +243,7 @@ int main()
                                         printf("Entrer cin qui veut cette opération: ");
                                        scanf("%s", recherche);
 
-                                       for(i=0; i<count_c; i++)
+                                       for(i=0; i<count_c-1; i++)
                                        {
 
                                          if(strcmp(recherche, c[i].CIN )== 0)
@@ -262,12 +251,13 @@ int main()
                                            found=1;
                                            printf("[%d] le nom [%s] \t le prenom [%s] \t  le numero [%s] \t  CIN [%s] \t le montant [%d] \n\n "
                                                    ,i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-                                         }
+                                       
 
-                                         printf("entrer la somme de depot en DH : \n");
-                                        scanf("%d", &depot);
+                                         
                                           do
                                         {
+                                        	printf("entrer la somme de depot en DH : \n");
+                                        scanf("%d", &depot);
 
                                             if(depot<100){ // CONDITION POUR LE MANTANT SUPERIEUR A 0
                                                 printf("entrer la somme de depot en DH superieur a # 100#: \n");
@@ -279,6 +269,7 @@ int main()
                                         c[i].montant= c[i].montant+depot;
                                         printf("le montant apres le depot est %f",c[i].montant);
                                        }
+                                   }
 
                                         if(found==0) printf("Not found");
 
@@ -292,7 +283,7 @@ int main()
 
                 case 4:
                          {// AFFICHAGE ==================================================================================
-        do{
+        		do{
 
 				printf("1 => recherche par cin \n");
                 printf("2 => Par Ordre Ascendant\n");
@@ -326,13 +317,13 @@ int main()
                 case 2:
                 	{
                 	trie_Ascendant();
-                     for(i=1;i<=count_c;i++)
+                     for(i=0;i<=count_c-1;i++)
                     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
                	break;}
                 case 3:
                 	{
-                	    trie_Descendant();
-              for(i=1;i<=count_c;i++)
+                	    trie_Ascendant();
+              for(i=count_c-1;i>=0;i--)
     {
      printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
     }
@@ -341,26 +332,23 @@ int main()
                     {
                 	printf("entrez le montant");
                 	scanf("%f",&m);
-                	if(m<c[i].montant){
-
-              	trie_Ascendant();
-                	 for(i=1;i<=count_c;i++)
-    {
+              			trie_Ascendant();
+                	 for(i=0;i<=count_c-1;i++)
+    {				if(m<c[i].montant)
      printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
     }
-                		}
+                		
                 	break;}
                 case 5:
                     {
                 printf("entrez le montant");
                 	scanf("%f",&m);
-                	if(m<c[i].montant){
-
-                		trie_Descendant();
-                	 for(i=1;i<=count_c;i++)
-    {
-     printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
-    }
+                	trie_Ascendant();
+                	        	
+                	 for(i=count_c-1;i>=0;i--)
+   					 {			if(m<c[i].montant)
+     			printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %.2f \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+    				}
                 	break;}
 
                  default:
@@ -368,42 +356,44 @@ int main()
 
 			}
                   break;  }
+                  
 
                 case 5:
                     {
 			     printf("fidelisation \n");
 		      if(count_c<3){
       for( i=1;i<=count_c;i++){
-      printf("\n- we gonna add 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
+      printf("\n- nous allons ajouter 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
       printf("\n");
       c[i].montant += c[i].montant*0.013;
-      printf("\nnow he have  %.2f ",c[i].montant);
+      printf("\n maintenant il a  %.2f ",c[i].montant);
        printf("\n");
       }
      }
      else{
      trie_Descendant();
      for( i =1;i<=3;i++){
-     printf("\n- we gonna add 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
+     printf("\n nous allons ajouter 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
       printf("\n");
       c[i].montant += c[i].montant*0.013;
-      printf("\n now he have %.2f ",c[i].montant);
+      printf("\n maintenant il a %.2f ",c[i].montant);
       printf("\n");
      }
      }
                 break;}
                 case 6:
                     {
-			         exit=0;
+			         printf("");
             break;}
           default:
             break;}
-             }
-
-                        }while(choix !=6);
-                    return 0;
-                    system("pause");
-   
-     }
+             }while(choix !=6);
+			 return 0;
+                        }
+                    
+                    
+        
+  
+     
     
     
