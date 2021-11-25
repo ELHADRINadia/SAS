@@ -215,7 +215,7 @@ int main()
                                          if(strcmp(recherche,c[i].CIN )== 0)
                                          {
                                            found=1;
-                                           printf("%d le nom %s \t le prenom %s \t le numero %s \t  CIN %s \t le mantant %f DH \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
+                                           printf("%d le nom %s \t le prenom %s \t le numero %d \t  CIN %s \t le mantant %f DH \n\n ",i+1,c[i].nom,c[i].prenom,c[i].numero,c[i].CIN,c[i].montant);
 
 
                                          }
@@ -226,21 +226,21 @@ int main()
                                         scanf("%d", &retrait);
                                         do
                                         {
-                                            if(retrait<100 ) // CONDITION POUR LE MANTANT SUPERIEUR A 100
+                                            if(retrait<100 ) // CONDITION POUR LE MONTANT SUPERIEUR A 100
                                                 {
                                                 printf("entrer la somme de retrait en DH superieur a  100 : \n");
                                                 scanf("%d", &retrait);
                                                 }
 
                                         }while (retrait<100);
-                                        if (retrait>c[0].montant) // POUR NE PAS RETRAIT A COMPTE IF MANTANT EGALE 0
+                                        if (retrait>c[i].montant) // POUR NE PAS RETRAIT A COMPTE IF MONTANT EGALE 0
 
                                             printf(" Votre Montant ne pa Suffisant pour retirer \n");
 
                                         else
 
-                                            c[0].montant= c[0].montant-retrait;
-                                            printf("le montant apres le retrait est %f",c[0].montant);
+                                            c[i].montant= c[i].montant-retrait;
+                                            printf("le montant apres le retrait est %f",c[i].montant);
                                         }
 
                                         if(found==0) printf("Not found");
@@ -276,8 +276,8 @@ int main()
 
                                         }while (depot<100);
 
-                                        c[0].montant= c[0].montant+depot;
-                                        printf("le montant apres le depot est %f",c[0].montant);
+                                        c[i].montant= c[i].montant+depot;
+                                        printf("le montant apres le depot est %f",c[i].montant);
                                        }
 
                                         if(found==0) printf("Not found");
@@ -292,6 +292,7 @@ int main()
 
                 case 4:
                          {// AFFICHAGE ==================================================================================
+        do{
 
 				printf("1 => recherche par cin \n");
                 printf("2 => Par Ordre Ascendant\n");
@@ -300,10 +301,10 @@ int main()
                 printf("5 => Par Ordre Descendant (les comptes bancaire ayant un montant supérieur à chiffre introduit) \n");
                 printf("6 => afficher la liste des donnees \n");
 
-                printf("Votre choix : ");
+             printf("Votre choix : ");
 			scanf("%d", &choix2);
 
-            while(choix2 <1 || choix2>5);
+            }while(choix2 <1 || choix2>5);
             switch(choix2)
 			{
             	case 1:
