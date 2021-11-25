@@ -374,20 +374,20 @@ int main()
 			     printf("fidelisation \n");
 		      if(count_c<3){
       for( i=1;i<=count_c;i++){
-      printf("\n- we gonna add 1.3 to %s  : %.2lf",c[i].CIN,c[i].montant);
+      printf("\n- we gonna add 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
       printf("\n");
       c[i].montant += c[i].montant*0.013;
-      printf("\nnow he have  %.2lf ",c[i].montant);
+      printf("\nnow he have  %.2f ",c[i].montant);
        printf("\n");
       }
      }
      else{
      trie_Descendant();
      for( i =1;i<=3;i++){
-     printf("\n- we gonna add 1.3 to %s  : %.2lf",c[i].CIN,c[i].montant);
+     printf("\n- we gonna add 1.3 to %s  : %.2f",c[i].CIN,c[i].montant);
       printf("\n");
       c[i].montant += c[i].montant*0.013;
-      printf("\n now he have %.2lf ",c[i].montant);
+      printf("\n now he have %.2f ",c[i].montant);
       printf("\n");
      }
      }
